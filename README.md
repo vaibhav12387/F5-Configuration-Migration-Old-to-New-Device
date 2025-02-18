@@ -92,9 +92,13 @@ To ensure a smooth migration, this SOP provides:
 ### Step 5-1: Modify bigip.conf
 1. `Copy the extracted 'bigip.conf' file to the 'local system.':
    ```sh
+   ```
 2. Edit bigip.conf and remove unnecessary sections (use Notepad++ for easy editing).
 3. Move the updated bigip.conf file to the new F5 system:
+   ```sh
+   extracted_ucs/config/bigip.conf
    ```
+   
 ### Step 6: Modify and Merge Configuration
 1. Move `bigip.conf` to `/var/tmp/`:
    ```sh
