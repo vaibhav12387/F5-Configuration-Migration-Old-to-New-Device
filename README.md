@@ -88,7 +88,13 @@ To ensure a smooth migration, this SOP provides:
    - `bigip_local.conf`
    - `ssl.crt/`
    - `ssl.key/`
-
+   - 
+### Step 5-1: Modify bigip.conf
+1. `Copy the extracted 'bigip.conf' file to the 'local system.':
+   ```sh
+2. Edit bigip.conf and remove unnecessary sections (use Notepad++ for easy editing).
+3. Move the updated bigip.conf file to the new F5 system:
+   ```
 ### Step 6: Modify and Merge Configuration
 1. Move `bigip.conf` to `/var/tmp/`:
    ```sh
@@ -132,35 +138,6 @@ To ensure a smooth migration, this SOP provides:
 3. Save final configuration:
    ```sh
    save sys config
-   ```
-
-### Step 9: Verify Cloud Failover Extension (CFE)
-1. Check current CFE configuration:
-   ```sh
-   curl -su admin: -X GET http://localhost:8100/mgmt/shared/cloud-failover/declare | jq .
-   ```
-2. Update the failover label and next-hop addresses:
-   ```sh
-   vi cfe.json
-   ```
-   Update with:
-   ```json
-   {
-     "class": "Cloud_Failover",
-     "environment": "aws",
-     "failoverRoutes": {
-       "defaultNextHopAddresses": {
-         "items": [
-           "10.36.48.180",
-           "10.36.49.228"
-         ]
-       }
-     }
-   }
-   ```
-3. Apply the new CFE configuration:
-   ```sh
-   curl -su admin: -X POST -d @cfe.json http://localhost:8100/mgmt/shared/cloud-failover/declare | jq .
    ```
 
 ## Conclusion
